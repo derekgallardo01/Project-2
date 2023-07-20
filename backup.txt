@@ -1,0 +1,149 @@
+//***********************************************************************************************************************************************
+//
+//  Name: Derek Gallardo
+//  Date: July 3rd, 2022
+//  Version: 1.0.0
+//  Programming Language: Java
+//  Java Version: 17
+//  Description: Calculate the trajectory of a projectile based on launch angles and launch velocities. 
+//               It will create a matrix of all of the possible trajectories as well as the trajectories to help your team hit the target range. 
+//
+//***********************************************************************************************************************************************
+
+import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class ProjectTester {
+public static void main (String[] args) throws Exception {
+  
+  // Book bookOne = new Book("The Catch", "Science Fiction", "Blue", 0, 288, false);
+  
+  // Line 2 - Speeds
+      int two = 1;
+      int three = 2; 
+      String[] stringArray = null;
+      String[] angleArray = null;
+      String[] speeds = null;
+      String[] angles = null;
+      try {
+        String lineTwo = Files.readAllLines(Paths.get("input.txt")).get(two);
+        String lineThree = Files.readAllLines(Paths.get("input.txt")).get(three);
+        stringArray = lineTwo.split(" ");
+        angleArray = lineThree.split(" ");
+        speeds = stringArray;
+        angles = angleArray;
+        speeds[0] = stringArray[1];
+        speeds[1] = stringArray[2];
+        speeds[2] = stringArray[3];
+        speeds[3] = stringArray[4];
+        speeds[4] = stringArray[5];
+        angles[0] = angleArray[1];
+        angles[1] = angleArray[2];
+        angles[2] = angleArray[3];
+        angles[3] = angleArray[4];
+        angles[4] = angleArray[5];
+        angles[5] = angleArray[6];
+        angles[6] = angleArray[7]; 
+        angles[7] = angleArray[8];  
+        
+        for (int i = 0; i < 5; i++) {
+        
+        System.out.println(speeds[i]);
+        
+        }
+        
+       for (int i = 0; i < 8; i++) {
+        
+        System.out.println(angles[i]);
+        
+        }
+        
+        int[][] arr = { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9 ,10 } };
+  
+        for (int i = 0; i < arr[0].length; i++) {
+            for (int j = 0; j < arr[1].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+  
+            System.out.println();
+        }
+
+      } 
+      catch(IOException e){
+        System.out.println(e);
+      }
+  
+  
+    // while ((outputString = br.readLine()) != null)
+    // {
+      
+    // }
+    
+    private static int[] getNumInts(int num, Scanner inFile) {
+// Create an integer array
+int[] array = new int[num];
+
+// Read num ints
+for (int i = 0; i < num; i++)
+array[i] = inFile.nextInt();
+
+// Return array
+return array;
+}
+
+public static void main(String[] args) {
+try {
+// Scanner to read from the file
+Scanner inFile = new Scanner(new File(FILE));
+
+// Read the number of sets
+int sets = inFile.nextInt();
+
+// Read each set
+for (int i = 0; i < sets; i++) {
+// Read number of speeds
+int[] speeds = getNumInts(inFile.nextInt(), inFile);
+
+// Read number of angles
+int[] angles = getNumInts(inFile.nextInt(), inFile);
+
+// Create a Trebuchet object
+Trebuchet trebuchet = new Trebuchet(speeds, angles);
+
+// Print trajectories
+trebuchet.printProjectileTable();
+
+// Read minimum trajectory
+double minTrajectory = inFile.nextDouble();
+
+// Read maximum trajectory
+double maxTrajectory = inFile.nextDouble();
+
+// Get best combinations
+System.out.print("\nBest Trajectory values:\n");
+List<String> bestValues = trebuchet.getBestTrajectoryValues(minTrajectory, maxTrajectory);
+
+// Check if bestValues is not null
+if (bestValues != null) {
+// Print bestValues
+for (String value : bestValues)
+System.out.print(value + " ");
+
+} else
+System.out.print("\nProjectile cannot be launched successfully");
+System.out.print("\n");
+}
+
+// Close inFile
+inFile.close();
+
+} catch (FileNotFoundException fnfe) {
+System.out.println("ERROR: File not found: " + FILE);
+}
+            
+ } 
+}
